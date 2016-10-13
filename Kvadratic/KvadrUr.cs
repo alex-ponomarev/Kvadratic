@@ -20,7 +20,7 @@ namespace Kvadratic
         public string KvadrMath(int x_Number)
         {
             double D;
-            if (a != 0) //проверка на точное существование ответа
+            if (a != 0) //проверка классического уравнения
             {
                 D = b * b - 4 * a * c;
                 if (D == 0)
@@ -41,7 +41,7 @@ namespace Kvadratic
                         return "" + ((-b - Math.Sqrt(D)) / (2 * a)); //x2
                 }
             }
-            else {   //возможно отсутствие ответа, проверка b, c
+            else {  //проверка варианта bx+c=0
                 if (b == 0)
                 {          
                     if (c == 0)          
