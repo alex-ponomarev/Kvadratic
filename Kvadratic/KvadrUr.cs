@@ -9,12 +9,16 @@ namespace Kvadratic
     class KvadrUr
     {
         double a, b, c;
+        double x1, x2;
 
         public KvadrUr(string a, string b, string c)
         {
-            double.TryParse(a, out this.a);
-            double.TryParse(b, out this.b);
-            double.TryParse(c, out this.c);
+            if (!(double.TryParse(a, out this.a)))
+                throw new Exception("Ошибка значения A");
+            if (double.TryParse(b, out this.b) == false)
+                throw new Exception("Ошибка значения B");
+            if (double.TryParse(b, out this.c) == false)
+                throw new Exception("Ошибка значения C");
         }
      
         public string KvadrMath(int x_Number)
@@ -26,7 +30,10 @@ namespace Kvadratic
                 if (D == 0)
                 {
                     if (x_Number == 1)
-                        return "" + (-b / 2 * a); //x1
+                    {
+                        x1 = -b / 2 * a; //x1
+                        return "" + x1;
+                    }
                     else
                         return "Не существует"; //x2   
                 }
@@ -35,10 +42,17 @@ namespace Kvadratic
                     return "Ответа нет.";
                 else  //D > 0
                 {
-                    if (x_Number == 1)              
-                        return "" + ((-b + Math.Sqrt(D)) / (2 * a)); //x1
-                    else                  
-                        return "" + ((-b - Math.Sqrt(D)) / (2 * a)); //x2
+                    if (x_Number == 1)
+                    {
+                        x1 = (-b + Math.Sqrt(D)) / (2 * a);
+                        return "" + x1; //x1
+
+                    }
+                    else
+                    {
+                        x2 = (-b - Math.Sqrt(D)) / (2 * a);
+                        return "" + x2; //x1
+                    }
                 }
             }
             else {  //проверка варианта bx+c=0
@@ -47,16 +61,87 @@ namespace Kvadratic
                     if (c == 0)          
                         return "Любое значение";
                     else                  
-                        return "Не существует";
+                        return "Не существует"; //NaN // infinity
+                    double gg = double.NaN
                 }
 
                 else
-                {    
-                    if (x_Number == 1)                 
-                        return ("" + (-c / b)); //x1 
-                    else                    
+                {
+                    if (x_Number == 1)
+                    {
+                        x1 = -c / b;
+                        return "" + x1; //x1 
+                    }
+                    else
                         return "Значения нет"; //x2
                 }
+            }
+        }
+        public double X1
+        {
+            get {
+                double D;
+                if (a != 0) //проверка классического уравнения
+                {
+                    D = b * b - 4 * a * c;
+                    if (D == 0)
+                        x1 = -b / 2 * a; //x1                       
+                    else
+                    if (D < 0)
+                        throw new Exception("Для x1 ответа нет");
+                    else  //D > 0                
+
+                        x1 = (-b + Math.Sqrt(D)) / (2 * a);
+                }
+                else {  //проверка варианта bx+c=0
+                    if (b == 0)
+                    {
+                        if (c == 0)
+                            throw new Exception("x1 любое значение");
+                        else
+                            throw new Exception("x1 не существует");
+                    }
+
+                    else
+                        x1 = -c / b;                                      
+                }
+
+                return x1;
+            }
+        }
+        public double X2
+        {
+            get
+            {
+                double D;
+                if (a != 0) //проверка классического уравнения
+                {
+                    D = b * b - 4 * a * c;
+                    if (D == 0)
+                        throw new Exception("x2 не существует"); //x2   
+                    else
+                    if (D < 0)
+                        throw new Exception("Для x2 ответа нет.");
+                    else  //D > 0
+                    {
+                        x2 = (-b - Math.Sqrt(D)) / (2 * a);
+                    }
+                }
+                else {  //проверка варианта bx+c=0
+                    if (b == 0)
+                    {
+                        if (c == 0)
+                            throw new Exception("x2 - любое значение");
+                        else
+                            throw new Exception("x2 - не существует");
+                    }
+
+                    else
+                        throw new Exception("Для x2 значения нет");
+                    }
+
+
+                return x2;
             }
         }
     }

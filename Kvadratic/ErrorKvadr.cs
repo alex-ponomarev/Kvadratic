@@ -24,7 +24,8 @@ namespace Kvadratic
 
         public bool FindError(TextBox a, TextBox b, TextBox c)
         {
-            bool NoError = true;
+            bool noError = true;
+            string erMessage1 = "Допускаются только числа";
             errorProvider1.Dispose();
             try
             {
@@ -32,8 +33,8 @@ namespace Kvadratic
             }
             catch
             {
-                NoError = false;
-                errorProvider1.SetError(a, "Допускаются только числа");
+                noError = false;
+                errorProvider1.SetError(a, erMessage1);
             }
 
             try
@@ -42,8 +43,8 @@ namespace Kvadratic
             }
             catch
             {
-                NoError = false;
-                errorProvider1.SetError(b, "Допускаются только числа");
+                noError = false;
+                errorProvider1.SetError(b, erMessage1);
             }
 
             try
@@ -52,10 +53,10 @@ namespace Kvadratic
             }
             catch
             {
-                NoError = false;
-                errorProvider1.SetError(c, "Допускаются только числа");
+                noError = false;
+                errorProvider1.SetError(c, erMessage1);
             }
-            return NoError;
+            return noError;
 
         }
     }
