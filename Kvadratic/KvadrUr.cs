@@ -20,7 +20,7 @@ namespace Kvadratic
             if (double.TryParse(b, out this.c) == false)
                 throw new Exception("Ошибка значения C");
         }
-     
+
         public string KvadrMath(int x_Number)
         {
             double D;
@@ -57,12 +57,12 @@ namespace Kvadratic
             }
             else {  //проверка варианта bx+c=0
                 if (b == 0)
-                {          
-                    if (c == 0)          
+                {
+                    if (c == 0)
                         return "Любое значение";
-                    else                  
-                        return "Не существует"; //NaN // infinity
-                    double gg = double.NaN
+                    else
+                        return "Не существует";
+
                 }
 
                 else
@@ -79,7 +79,8 @@ namespace Kvadratic
         }
         public double X1
         {
-            get {
+            get
+            {
                 double D;
                 if (a != 0) //проверка классического уравнения
                 {
@@ -103,7 +104,7 @@ namespace Kvadratic
                     }
 
                     else
-                        x1 = -c / b;                                      
+                        x1 = -c / b;
                 }
 
                 return x1;
@@ -138,11 +139,123 @@ namespace Kvadratic
 
                     else
                         throw new Exception("Для x2 значения нет");
-                    }
+                }
 
 
                 return x2;
             }
         }
+        public void KvadrBoth() //NaN //infinity
+        {
+            double D;
+            if (a != 0) //проверка классического уравнения
+            {
+                D = b * b - 4 * a * c;
+                if (D == 0)
+                {
+                    x1 = -b / 2 * a; //x1
+                    x2 = double.NaN;
+                }
+                else
+                if (D < 0)
+                {
+                    x1 = double.NaN;
+                    x2 = double.NaN;
+                }
+                else  //D > 0
+                {
+                    x1 = (-b + Math.Sqrt(D)) / (2 * a);
+                    x2 = (-b - Math.Sqrt(D)) / (2 * a);
+                }
+            }
+            else {  //проверка варианта bx+c=0
+                if (b == 0)
+                {
+                    if (c == 0)
+                        x1 = double.PositiveInfinity;
+                    else
+                        x1 = double.NaN;
+                    x2 = double.NaN;
+                }
+
+                else
+                {
+                    x1 = -c / b;
+                    x2 = double.NaN;
+                }
+            }
+        }
+        public double KvadrResult(int x_Number) //Naninfinity //Для одного поля
+        {
+            double D;
+            if (a != 0) //проверка классического уравнения
+            {
+                D = b * b - 4 * a * c;
+                if (D == 0)
+                {
+                    if (x_Number == 1)
+                    {
+                        x1 = -b / 2 * a; //x1
+                        return x1;
+                    }
+                    else
+                    {
+                        x2 = double.NaN;
+                        return x2; //x2   
+                    }
+                }
+                else
+                if (D < 0)
+                {
+                    x1 = double.NaN;
+                    x2 = double.NaN;
+                    return double.NaN;
+                }             
+                else  //D > 0
+                {
+                    if (x_Number == 1)
+                    {
+                        x1 = (-b + Math.Sqrt(D)) / (2 * a);
+                        return x1; //x1
+
+                    }
+                    else
+                    {
+                        x2 = (-b - Math.Sqrt(D)) / (2 * a);
+                        return x2; //x2
+                    }
+                }
+            }
+            else {  //проверка варианта bx+c=0
+                if (b == 0)
+                {
+                    if (c == 0)
+                    {
+                        x1 = double.PositiveInfinity;
+                        return x1;
+                    }
+                    else
+                    {
+                        x2 = double.NaN;
+                        return x2;
+                    }
+                }
+
+                else
+                {
+                    if (x_Number == 1)
+                    {
+                        x1 = -c / b;
+                        return x1; //x1 
+                    }
+                    else
+                    {
+                        x2 = double.NaN;
+                        return x2; //x2
+                    }
+                }
+            }
+        }
     }
 }
+ 
