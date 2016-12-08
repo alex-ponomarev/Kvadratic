@@ -24,14 +24,14 @@ namespace LabkaOOP
         /// <summary>
         /// вычисление периметра
         /// </summary>
-        virtual protected void P()  
+        virtual public void P()  
         {
             p = 4 * ((Math.PI * a * b + (a - b)) / (a + b)); 
         }
         /// <summary>
         /// вычисление площади
         /// </summary>
-        virtual protected void S()  
+        virtual public void S()  
         {
             s = Math.PI * a * b;
         }
@@ -39,7 +39,7 @@ namespace LabkaOOP
         /// выдать название
         /// </summary>
         /// <returns>название фигуры</returns>
-        virtual protected string About()  
+        virtual public string About()  
         {
             return ("Эллипс");
         }
